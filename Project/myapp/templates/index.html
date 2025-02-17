@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume to HTML(Individual Assignment)</title>
+    
+</head>
+<body>
+    <h1 style="text-align: center;">{{ cv.name }}</h1>
+    <p class="contact" style="text-align: center;">
+         <a href="mailto:{{ cv.email }}">{{ cv.email }}</a> | 
+        {{ cv.phone }} | 
+        <a href="{{ cv.linkedin }}" target="_blank">LinkedIn</a> | 
+        <a href="{{ cv.github }}" target="_blank">GitHub</a>
+    </p>
+
+    <div class="section">
+        <h2>Education</h2>
+        <b><hr style="width: 100%; height: 1px; background-color: black; margin:auto;"></b>
+        <p><strong>{{ cv.education.masters.degree }}</strong> - {{ cv.education.masters.institution }} ({{ cv.education.masters.year }})</p>
+        <p><strong>{{ cv.education.bachelors.degree }}</strong> - {{ cv.education.bachelors.institution }} ({{ cv.education.bachelors.year }})</p>
+    </div>
+    
+    <div class="section">
+        <h2>Technical Skills</h2>
+        <b><hr style="width: 100%; height: 1px; background-color: black; margin:auto;"></b>
+        <p><strong>Programming Languages:</strong> {{ cv.skills.programming }}</p>
+        <p><strong>Frameworks & Tools:</strong> {{ cv.skills.frameworks }}</p>
+        <p><strong>Databases & Distributed Systems:</strong> {{ cv.skills.databases }}</p>
+    </div>
+
+    <div class="section">
+        <h2>Work Experience</h2>
+        <b><hr style="width: 100%; height: 1px; background-color: black; margin:auto;"></b>
+        {% for job in cv.experience %}
+            <p><strong>{{ job.role }}</strong> - {{ job.company }} ({{ job.duration }})</p>
+            <ul>
+                {% for point in job.responsibilities %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>Projects</h2>
+        <b><hr style="width: 100%; height: 1px; background-color: black; margin:auto;"></b>
+        {% for project in cv.projects %}
+            <p><strong>{{ project.title }}</strong> ({{ project.year }})</p>
+            <ul>
+                {% for point in project.details %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>Leadership & Awards</h2>
+        <b><hr style="width: 100%; height: 1px; background-color: black; margin:auto;"></b>
+        <ul>
+            {% for award in cv.awards %}
+                <li>{{ award }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
